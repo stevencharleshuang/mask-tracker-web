@@ -9,9 +9,9 @@ const Login = (props) => {
       Login
       <div className="login-form">
         <input
-          autocapitalize="off"
-          autocorrect="off"
-          maxlength="75"
+          autoCapitalize="off"
+          autoCorrect="off"
+          maxLength="75"
           name="email"
           placeholder="email"
           type="text"
@@ -19,9 +19,9 @@ const Login = (props) => {
           value=""
         />
         <input
-          autocapitalize="off"
-          autocorrect="off"
-          maxlength="75"
+          autoCapitalize="off"
+          autoCorrect="off"
+          maxLength="75"
           name="email"
           placeholder="password"
           type="password"
