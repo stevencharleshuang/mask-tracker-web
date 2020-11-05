@@ -41,6 +41,16 @@ export default class Register extends React.Component {
         };
 
         await db.doc(`/users/${uid}`).set(user, { merge: true });
+
+        this.setState({
+          formData: {
+            email: '',
+            fullname: '',
+            username: '',
+            password: '',
+          },
+          isRegistered: true,
+        });
       }
     } catch (error) {
       console.error(error.message);
@@ -107,7 +117,7 @@ export default class Register extends React.Component {
         <div>
           Have an account? <Link to="/">Log In</Link>
         </div>
-        {this.isRegistered && <Redirect to="/login" />}
+        {this.state.isRegistered && <Redirect to="/" />}
       </div>
     );
   };
