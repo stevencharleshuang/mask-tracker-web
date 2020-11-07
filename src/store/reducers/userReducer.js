@@ -1,7 +1,8 @@
-import { SET_IS_AUTHENTICATED } from '../actions/userActions';
+import { SET_IS_AUTHENTICATED, GET_USER_MASKS } from '../actions/userActions';
 
 const initialState = {
   isAuthenticated: false,
+  userMasks: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: action.payload,
+      };
+    case GET_USER_MASKS:
+      return {
+        ...state,
+        userMasks: action.payload,
       };
     default:
       return state;
