@@ -1,15 +1,19 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getUserMasks } from '../store/actions/userActions';
 import { auth } from '../constants/firebase';
+
+import UserMasksList from './UserMasksList';
+import UserMaskDetails from './UserMaskDetails';
 
 class UserMasks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userMasks: [],
-      count: 0
+      selectedMask: null,
+      showMaskDetails: false,
     };
   }
 
@@ -17,28 +21,38 @@ class UserMasks extends React.Component {
     try {
       await this.props.getUserMasks(auth.currentUser.uid);
       const userMasks = await this.props.userMasks;
-      console.log(await userMasks);
       this.setState({ userMasks });
     } catch (error) {
       console.error(error);
     }
   }
 
-  renderUserMasks = () => {
-    return this.state.userMasks.map((mask, i) => (
-      <div key={i}>
-        <h4>{mask.maskNickname}</h4>
-      </div>
-    ));
+  handleShowMaskDetails = (e) => {
+    const selectedMask = this.state.userMasks.filter(
+      (mask) => mask.maskId === e.target.id
+    );
+    this.setState({ selectedMask: selectedMask[0] });
   };
+
+  handleHideMaskDetails = () => this.setState({ selectedMask: null });
 
   render() {
     return (
       <div>
-        <h1>Your masks</h1>
-        {this.state.userMasks && this.renderUserMasks()}
         {!this.props.isAuthenticated && <Redirect to="/login" />}
-        <button onPress={() => this.setState(prevState => prevState.count++)}>re-render</button>
+        {this.state.selectedMask ? (
+          <UserMaskDetails
+            mask={this.state.selectedMask}
+            handleHideMaskDetails={this.handleHideMaskDetails}
+          />
+        ) : (
+          this.props.userMasks && (
+            <UserMasksList
+              userMasks={this.state.userMasks}
+              handleShowMaskDetails={this.handleShowMaskDetails}
+            />
+          )
+        )}
       </div>
     );
   }
@@ -50,6 +64,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.isAuthenticated,
+  userMasks: state.userMasks,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserMasks);

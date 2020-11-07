@@ -21,9 +21,9 @@ export const getUserMasks = (uid) => async (dispatch) => {
       .collection('masks')
       .where('ownerId', '==', uid)
       .get();
+
     maskData.forEach((mask) => userMasks.push(mask.data()));
 
-    console.log({ userMasks });
     return dispatch({ type: GET_USER_MASKS, payload: userMasks });
   } catch (error) {
     console.error(error);
