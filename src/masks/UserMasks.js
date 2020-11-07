@@ -9,6 +9,7 @@ class UserMasks extends React.Component {
     super(props);
     this.state = {
       userMasks: [],
+      count: 0
     };
   }
 
@@ -37,6 +38,7 @@ class UserMasks extends React.Component {
         <h1>Your masks</h1>
         {this.state.userMasks && this.renderUserMasks()}
         {!this.props.isAuthenticated && <Redirect to="/login" />}
+        <button onPress={() => this.setState(prevState => prevState.count++)}>re-render</button>
       </div>
     );
   }
