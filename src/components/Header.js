@@ -1,12 +1,15 @@
 import React from 'react';
 import { auth } from '../constants/firebase';
+import { connect } from 'react-redux';
+
+import { logout } from '../store/actions/userActions';
 
 const Header = (props) => {
   const handleSignOut = async () => {
     try {
       await auth.signOut();
-      console.log('User has signed out');
       window.localStorage.clear('token');
+      return props.logout();
     } catch (error) {
       console.error(error);
     }
@@ -15,9 +18,21 @@ const Header = (props) => {
   return (
     <header className="App-header">
       <h1>Mask Tracker</h1>
-      <button onClick={handleSignOut}>Sign Out</button>
+      {props.isAuthenticated && (
+        <button onClick={handleSignOut}>Sign Out</button>
+      )}
     </header>
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+  };
+};
+
+const mapDispatchToProps = {
+  logout,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

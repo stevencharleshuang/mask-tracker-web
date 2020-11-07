@@ -1,9 +1,19 @@
+import { SET_IS_AUTHENTICATED } from '../actions/userActions';
+
 const initialState = {
-  isLoggedIn: false,
+  isAuthenticated: false,
 };
 
 const userReducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case SET_IS_AUTHENTICATED:
+      return {
+        ...state,
+        isAuthenticated: action.payload,
+      };
+    default:
+      return state;
+  }
 };
 
 export default userReducer;

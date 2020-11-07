@@ -1,75 +1,115 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import { auth } from '../constants/firebase';
+import { login, logout } from '../store/actions/userActions';
 
-const Login = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: '',
+      formData: {
+        email: '',
+        password: '',
+      },
+      isLoggedIn: false,
+    };
 
-  const unsubscribe = auth.onAuthStateChanged((user) => {
-    user ? setIsLoggedIn(true) : setIsLoggedIn(false);
-  });
+    this.unsubscribe = null;
+  }
 
-  useEffect(() => unsubscribe(), []);
+  componentDidMount() {
+    this.unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log(`${user.email} is signed in`);
+        this.props.login();
+        this.setState({ isLoggedIn: true });
+      } else {
+        console.log('no user is signed in');
+        this.props.logout();
+      }
+    });
+  }
 
-  const handleInputChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  handleInputChange = (e) => {
+    this.setState(
+      (prevState) => (prevState.formData[e.target.name] = e.target.value)
+    );
   };
 
-  const handleSubmit = async () => {
+  handleSubmit = async () => {
     try {
       const user = await auth.signInWithEmailAndPassword(
-        formData.email,
-        formData.password
+        this.state.formData.email,
+        this.state.formData.password
       );
 
       window.localStorage.setItem('token', await user.user.getIdToken());
-      setFormData({ email: '', password: '' });
-      setIsLoggedIn(true);
+      this.setState({ formData: { email: '', password: '' } });
     } catch (error) {
       console.error(error);
-      setError(error);
+      this.setState({ error: error.message });
     }
   };
 
-  return (
-    <div>
-      Login
-      <div className="login-form">
-        <input
-          autoCapitalize="off"
-          autoCorrect="off"
-          maxLength="75"
-          name="email"
-          placeholder="email"
-          type="text"
-          className="login login-email"
-          onChange={handleInputChange}
-          value={formData.email}
-        />
-        <input
-          autoCapitalize="off"
-          autoCorrect="off"
-          maxLength="75"
-          name="password"
-          placeholder="password"
-          type="password"
-          className="login login-password"
-          onChange={handleInputChange}
-          value={formData.password}
-        />
-      </div>
-      <div className="button-wrapper">
-        <button onClick={handleSubmit}>Log In</button>
-      </div>
-      <div className="error-container">{error && <h4>{error}</h4>}</div>
+  render() {
+    return (
       <div>
-        Don't have an account? <Link to="register">Sign Up</Link>
+        Login
+        <div className="login-form">
+          <input
+            autoCapitalize="off"
+            autoCorrect="off"
+            maxLength="75"
+            name="email"
+            placeholder="email"
+            type="text"
+            className="login login-email"
+            onChange={(e) => this.handleInputChange(e)}
+            value={this.state.formData.email}
+          />
+          <input
+            autoCapitalize="off"
+            autoCorrect="off"
+            maxLength="75"
+            name="password"
+            placeholder="password"
+            type="password"
+            className="login login-password"
+            onChange={(e) => this.handleInputChange(e)}
+            value={this.state.formData.password}
+          />
+        </div>
+        <div className="button-wrapper">
+          <button onClick={this.handleSubmit}>Log In</button>
+        </div>
+        <div className="error-container">
+          {this.state.error && <h4>{this.state.error}</h4>}
+        </div>
+        <div>
+          Don't have an account? <Link to="register">Sign Up</Link>
+        </div>
+        {this.state.isLoggedIn && <Redirect to="/usermasks" />}
       </div>
-      {isLoggedIn && <Redirect to="/usermasks" />}
-    </div>
-  );
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+  };
 };
 
-export default Login;
+const mapDispatchToProps = {
+  login,
+  logout,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
