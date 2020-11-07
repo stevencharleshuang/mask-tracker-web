@@ -1,0 +1,10 @@
+header {
+  padding: 0 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: calc(8px + 2vmin);
+  background-color: #282c34;
+  color: white;
+}

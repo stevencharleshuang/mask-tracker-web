@@ -1,0 +1,31 @@
+.masks-list {
+  padding: 0 50px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.masks-list-image {
+  height: 150px;
+  width: auto;
+  z-index: -1000;
+}
+
+.masks-list-item {
+  width: 300px;
+  border-radius: 10px;
+  border: 2px solid black;
+}
+
+.masks-list-item:hover {
+  cursor: pointer;
+}
+
+.mask-details-container li {
+  list-style-type: none;
+}
+
+.mask-details-container img {
+  height: 350px;
+  width: auto;
+}

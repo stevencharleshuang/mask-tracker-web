@@ -18,7 +18,7 @@ const UserMaskDetails = (props) => {
   return (
     <div className="mask-details-container">
       <h3>{maskNickname}</h3>
-      <img alt="mask image" src={photoURL} />
+      <img alt="mask image" className="mask-details-image" src={photoURL} />
       <ul>
         <li>Brand: {brand}</li>
         <li>Mask Color: {maskColor}</li>

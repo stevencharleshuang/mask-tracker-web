@@ -2,6 +2,7 @@ import React from 'react';
 import { auth } from '../constants/firebase';
 import { connect } from 'react-redux';
 
+import './header-styles.css';
 import { logout } from '../store/actions/userActions';
 
 const Header = (props) => {

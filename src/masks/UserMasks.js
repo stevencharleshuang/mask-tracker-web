@@ -7,6 +7,8 @@ import { auth } from '../constants/firebase';
 import UserMasksList from './UserMasksList';
 import UserMaskDetails from './UserMaskDetails';
 
+import './mask-styles.css';
+
 class UserMasks extends React.Component {
   constructor(props) {
     super(props);
