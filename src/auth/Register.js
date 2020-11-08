@@ -63,50 +63,26 @@ export default class Register extends React.Component {
       <div>
         Register
         <div className="register-form">
-          <input
-            autoCapitalize="off"
-            autoCorrect="off"
-            maxLength="75"
-            name="email"
-            placeholder="email"
-            type="text"
-            className="register register-email"
-            onChange={(e) => this.handleInputChange(e, e.currentTarget.name)}
-            value={this.state.email}
-          />
-          <input
-            autoCapitalize="off"
-            autoCorrect="off"
-            maxLength="75"
-            name="fullname"
-            placeholder="fullname"
-            type="text"
-            className="register register-fullname"
-            onChange={(e) => this.handleInputChange(e, e.currentTarget.name)}
-            value={this.state.fullname}
-          />
-          <input
-            autoCapitalize="off"
-            autoCorrect="off"
-            maxLength="75"
-            name="username"
-            placeholder="username"
-            type="text"
-            className="register register-username"
-            onChange={(e) => this.handleInputChange(e, e.currentTarget.name)}
-            value={this.state.username}
-          />
-          <input
-            autoCapitalize="off"
-            autoCorrect="off"
-            maxLength="75"
-            name="password"
-            placeholder="password"
-            type="password"
-            className="register register-password"
-            onChange={(e) => this.handleInputChange(e, e.currentTarget.name)}
-            value={this.state.password}
-          />
+          {['email', 'fullname', 'username', 'password'].map((el) => (
+            <input
+              autoCapitalize="off"
+              autoCorrect="off"
+              maxLength="75"
+              key={el}
+              name={el}
+              placeholder={el}
+              type={
+                el === 'password' || el === 'email'
+                  ? el === 'password'
+                    ? 'password'
+                    : 'email'
+                  : 'text'
+              }
+              className={`register register-${el}`}
+              onChange={(e) => this.handleInputChange(e, e.currentTarget.name)}
+              value={this.state[el]}
+            />
+          ))}
         </div>
         <div className="button-wrapper">
           <button onClick={this.handleSubmit}>Sign Up</button>
