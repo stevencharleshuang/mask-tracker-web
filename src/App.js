@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Register from './auth/Register';
 import Login from './auth/Login';
 import UserMasks from './masks/UserMasks';
+import AddMask from './masks/AddMask';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/usermasks" component={UserMasks} />
+          <Route exact path="/addmask" component={AddMask} />
         </Switch>
       </Router>
     </div>

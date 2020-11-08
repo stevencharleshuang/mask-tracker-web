@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getUserMasks } from '../store/actions/userActions';
+import { getUserMasks } from '../store/actions/maskActions';
 import { auth } from '../constants/firebase';
 
 import UserMasksList from './UserMasksList';
@@ -22,7 +22,9 @@ class UserMasks extends React.Component {
   async componentDidMount() {
     try {
       await this.props.getUserMasks(auth.currentUser.uid);
+
       const userMasks = await this.props.userMasks;
+
       this.setState({ userMasks });
     } catch (error) {
       console.error(error);
@@ -65,8 +67,8 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.isAuthenticated,
-  userMasks: state.userMasks,
+  isAuthenticated: state.user.isAuthenticated,
+  userMasks: state.mask.userMasks,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserMasks);

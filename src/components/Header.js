@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { auth } from '../constants/firebase';
 import { connect } from 'react-redux';
 
@@ -19,6 +20,9 @@ const Header = (props) => {
   return (
     <header className="App-header">
       <h1>Mask Tracker</h1>
+      <a href="/addmask">
+        <h3>+</h3>
+      </a>
       {props.isAuthenticated && (
         <button onClick={handleSignOut}>Sign Out</button>
       )}
@@ -28,7 +32,7 @@ const Header = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.isAuthenticated,
+    isAuthenticated: state.user.isAuthenticated,
   };
 };
 

@@ -21,6 +21,10 @@
   cursor: pointer;
 }
 
+.mask-details-container ul {
+  padding: 0;
+}
+
 .mask-details-container li {
   list-style-type: none;
 }
