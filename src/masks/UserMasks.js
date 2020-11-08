@@ -24,7 +24,7 @@ class UserMasks extends React.Component {
       await this.props.getUserMasks(auth.currentUser.uid);
 
       const userMasks = await this.props.userMasks;
-
+      console.log(userMasks);
       this.setState({ userMasks });
     } catch (error) {
       console.error(error);

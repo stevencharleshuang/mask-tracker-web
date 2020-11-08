@@ -33,3 +33,14 @@
   height: 350px;
   width: auto;
 }
+
+.add-mask .form-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-mask .form-container .form-item {
+  margin: 10px auto;
+}

@@ -1,4 +1,4 @@
-import { GET_USER_MASKS } from '../actions/maskActions';
+import { GET_USER_MASKS, ADD_MASK } from '../actions/maskActions';
 
 const initialState = {
   userMasks: [],
@@ -10,6 +10,11 @@ const maskReducer = (state = initialState, action) => {
       return {
         ...state,
         userMasks: action.payload,
+      };
+    case ADD_MASK:
+      return {
+        ...state,
+        userMasks: state.userMasks.concat(action.payload),
       };
     default:
       return state;

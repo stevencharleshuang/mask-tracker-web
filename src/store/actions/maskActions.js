@@ -1,6 +1,7 @@
-import { auth, db } from '../../constants/firebase';
+import { auth, db, firebase } from '../../constants/firebase';
 
 export const GET_USER_MASKS = 'GET_USER_MASKS';
+export const ADD_MASK = 'ADD_MASK';
 
 export const getUserMasks = (uid) => async (dispatch) => {
   try {
@@ -18,8 +19,18 @@ export const getUserMasks = (uid) => async (dispatch) => {
   }
 };
 
-export const addMask = (uid) => async (dispatch) => {
+export const addMask = (payload) => async (dispatch) => {
   try {
+    const newMask = {
+      ownerId: auth.currentUser.uid,
+      ...payload,
+      startDate: firebase.firestore.Timestamp.now(),
+    };
+
+    const newMaskRef = await db.collection('masks').doc();
+    await newMaskRef.set({ ...newMask, maskId: newMaskRef.id });
+
+    return dispatch({ type: ADD_MASK, payload: newMask });
   } catch (error) {
     console.error(error);
   }

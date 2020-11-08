@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { auth } from '../constants/firebase';
-import { login, logout } from '../store/actions/userActions';
+import { login, logout, setUserData } from '../store/actions/userActions';
 
 class Login extends React.Component {
   constructor(props) {
@@ -21,10 +21,12 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = auth.onAuthStateChanged((user) => {
+    this.unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         console.log(`${user.email} is signed in`);
+        console.log(`User: ${user}`);
         this.props.login();
+        this.props.setUserData(await auth.currentUser);
         this.setState({ isLoggedIn: true });
       } else {
         console.log('no user is signed in');
@@ -110,6 +112,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   login,
   logout,
+  setUserData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
