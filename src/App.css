@@ -3,11 +3,25 @@
 }
 
 .App {
-  text-align: center;
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
-.App-link {
-  color: #61dafb;
+h1,
+h2,
+h3,
+h4 {
+  text-align: center;
+}
+
+main {
+  flex: 1;
+}
+
+main a:link,
+main a:visited {
+  color: #44aaff;
+  text-decoration: none;
 }

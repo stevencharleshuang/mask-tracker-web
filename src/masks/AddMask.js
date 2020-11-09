@@ -58,9 +58,19 @@ class AddMask extends React.Component {
     console.log(this.state);
     return (
       <div className="add-mask">
+        <div className="mask-image-container">
+          {this.state.brand === 'Happy Masks' && this.state.maskColor ? (
+            <img
+              alt="mask preview"
+              src={maskDigest.happyMasks[this.state.maskColor].photoURL}
+            />
+          ) : (
+            <div className="mask-image-container-null-image" />
+          )}
+        </div>
         <div className="form-container">
           <div className="form-item">
-            <label for="mask-nickname">Mask Nickname</label>
+            <label htmlFor="mask-nickname">Mask Nickname</label>
             <br />
             <input
               autoCapitalize="on"
@@ -75,7 +85,7 @@ class AddMask extends React.Component {
             />
           </div>
           <div className="form-item">
-            <label for="brand">Mask Brand</label>
+            <label htmlFor="brand">Mask Brand</label>
             <br />
             <select id="brand" name="brand" onChange={this.handleChange}>
               <option value="Happy Masks">Happy Masks</option>
@@ -83,7 +93,7 @@ class AddMask extends React.Component {
             </select>
           </div>
           <div className="form-item">
-            <label for="mask-color">Mask Color</label>
+            <label htmlFor="mask-color">Mask Color</label>
             <br />
             <select
               id="mask-color"
@@ -96,7 +106,7 @@ class AddMask extends React.Component {
             </select>
           </div>
           <div className="form-item">
-            <label for="mask-type">Mask Type</label>
+            <label htmlFor="mask-type">Mask Type</label>
             <br />
             <select id="mask-type" name="maskType" onChange={this.handleChange}>
               <option value="reusable">Reusable</option>
@@ -104,7 +114,7 @@ class AddMask extends React.Component {
             </select>
           </div>
           <div className="form-item">
-            <label for="total-hours">Mask Longevity</label>
+            <label htmlFor="total-hours">Mask Longevity</label>
             <br />
             <input
               autoCapitalize="on"
@@ -119,7 +129,7 @@ class AddMask extends React.Component {
             />
           </div>
           <div className="form-item">
-            <label for="hours-worn">Hours Worn</label>
+            <label htmlFor="hours-worn">Hours Worn</label>
             <br />
             <input
               autoCapitalize="on"
@@ -144,12 +154,9 @@ class AddMask extends React.Component {
           >
             re-render
           </button>
-          {this.state.brand === 'Happy Masks' && this.state.maskColor && (
-            <img
-              alt="mask preview"
-              src={maskDigest.happyMasks[this.state.maskColor].photoURL}
-            />
-          )}
+          <a href="#" onClick={() => this.props.history.push('/')}>
+            Back from whence you came
+          </a>
         </div>
       </div>
     );

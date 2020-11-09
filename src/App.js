@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 import Index from './components/Index';
 import Header from './components/Header';
@@ -8,18 +9,22 @@ import Login from './auth/Login';
 import UserMasks from './masks/UserMasks';
 import AddMask from './masks/AddMask';
 
+const history = createBrowserHistory();
+
 const App = () => {
   return (
     <div className="App">
-      <Header />
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Index}></Route>
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/usermasks" component={UserMasks} />
-          <Route exact path="/addmask" component={AddMask} />
-        </Switch>
+      <Router history={history}>
+        <Header />
+        <main>
+          <Switch>
+            <Route exact path="/" component={Index}></Route>
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/usermasks" component={UserMasks} />
+            <Route exact path="/addmask" component={AddMask} />
+          </Switch>
+        </main>
       </Router>
     </div>
   );

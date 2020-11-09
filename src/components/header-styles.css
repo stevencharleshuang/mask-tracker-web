@@ -8,3 +8,15 @@ header {
   background-color: #282c34;
   color: white;
 }
+
+header a:hover,
+header a:link,
+header a:visited,
+header a:active {
+  color: white;
+  text-decoration: none;
+}
+
+.header-button {
+  cursor: pointer;
+}

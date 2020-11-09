@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { auth } from '../constants/firebase';
 import { login, logout, setUserData } from '../store/actions/userActions';
 
+import './auth-styles.css';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -62,8 +64,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        Login
+      <div className="login-container">
         <div className="login-form">
           <input
             autoCapitalize="off"
