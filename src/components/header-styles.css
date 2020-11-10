@@ -9,6 +9,24 @@ header {
   color: white;
 }
 
+.header-container {
+  width: 100%;
+}
+
+.header-right {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+}
+
+.header-right-container {
+  margin: 0 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
 header a:hover,
 header a:link,
 header a:visited,
@@ -18,5 +36,13 @@ header a:active {
 }
 
 .header-button {
+  padding: 0;
+  height: 2em;
+  width: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px white solid;
+  border-radius: 10px;
   cursor: pointer;
 }

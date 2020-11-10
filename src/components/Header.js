@@ -19,18 +19,26 @@ const Header = (props) => {
 
   return (
     <header className="App-header">
+      <div className="header-left header-container">
       <Link to="/">
         <h1>Mask Tracker</h1>
       </Link>
-      <span
-        className="header-button"
-        onClick={() => props.history.push('/addmask')}
-      >
-        <h3>+</h3>
-      </span>
-      {props.isAuthenticated && (
-        <button onClick={handleSignOut}>Sign Out</button>
-      )}
+      </div>
+      <div className="header-right header-container">
+        <div className="header-right-container">
+          <span
+            className="header-button"
+            onClick={() => props.history.push('/addmask')}
+          >
+            <h3>+</h3>
+          </span>
+        </div>
+        <div className="header-right-container">
+          {props.isAuthenticated && (
+            <button onClick={handleSignOut}>Sign Out</button>
+          )}
+        </div>
+      </div>
     </header>
   );
 };

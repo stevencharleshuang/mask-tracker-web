@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import {capitalize} from '../utils/helperFunctions'
+
 const UserMaskDetails = (props) => {
   const {
     brand,
@@ -24,9 +26,9 @@ const UserMaskDetails = (props) => {
         </div>
         <div className="mask-details-container-item-details">
           <ul>
-            <li>Brand: {brand}</li>
-            <li>Mask Color: {maskColor}</li>
-            <li>Mask Type: {maskType}</li>
+            <li>Brand: {capitalize(brand)}</li>
+            <li>Mask Color: {capitalize(maskColor)}</li>
+            <li>Mask Type: {capitalize(maskType)}</li>
             <li>Total Hours: {totalHours} hours</li>
             <li>Hours Worn: {hoursWorn} hours</li>
             <li>Hours Remaining: {hoursRemaining} hours</li>
