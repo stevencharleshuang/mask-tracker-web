@@ -60,8 +60,7 @@ export default class Register extends React.Component {
 
   render = () => {
     return (
-      <div>
-        Register
+      <div className="register-container">
         <div className="register-form">
           {['email', 'fullname', 'username', 'password'].map((el) => (
             <input

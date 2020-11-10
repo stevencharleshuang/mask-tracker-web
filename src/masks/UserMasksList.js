@@ -16,9 +16,10 @@ const UserMasksList = (props) => {
               className="masks-list-item"
               onClick={(e) => props.handleShowMaskDetails(e)}
             >
-              <h4 className="masks-list-title">{mask.maskNickname}</h4>
+              <h4 className="masks-list-title" id={mask.maskId}>{mask.maskNickname}</h4>
               <img
                 className="masks-list-image"
+                id={mask.maskId}
                 alt="mask"
                 src={mask.photoURL}
               />

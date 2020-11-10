@@ -16,6 +16,7 @@
 }
 
 .masks-list-item {
+  margin: 25px;
   text-align: center;
   width: 300px;
   border-radius: 10px;
