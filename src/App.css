@@ -25,3 +25,8 @@ main a:visited {
   color: #44aaff;
   text-decoration: none;
 }
+
+.loading-spinner {
+  height: 5em;
+  width: auto;
+}

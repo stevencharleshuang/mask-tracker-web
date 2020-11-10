@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import loading from '../assets/loading.gif'
+
 const UserMasksList = (props) => {
   return (
     <div className="masks-list-container">
       <h1>Your masks</h1>
       <div className="masks-list">
-        {props.userMasks.length > 0 ? (
+        {!props.loading ? props.userMasks.length > 0 ? (
           props.userMasks.map((mask, i) => (
             <div
               id={mask.maskId}
@@ -31,7 +33,7 @@ const UserMasksList = (props) => {
             <br />
             <Link to="/addmask">Add a mask</Link>
           </div>
-        )}
+          ) : <img className="loading-spinner" alt="loading" src={loading}/>}
       </div>
     </div>
   );

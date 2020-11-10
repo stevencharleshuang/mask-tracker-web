@@ -27,15 +27,15 @@ const Header = (props) => {
       <div className="header-right header-container">
         <div className="header-right-container">
           <span
-            className="header-button"
+            className="header-button add-mask-button"
             onClick={() => props.history.push('/addmask')}
           >
             <h3>+</h3>
           </span>
         </div>
-        <div className="header-right-container">
+        <div className="header-right-container log-out-button">
           {props.isAuthenticated && (
-            <button onClick={handleSignOut}>Sign Out</button>
+            <span className="header-button" onClick={handleSignOut}>Sign Out</span>
           )}
         </div>
       </div>

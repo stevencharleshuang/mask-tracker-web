@@ -1,16 +1,24 @@
 header {
-  padding: 0 20px;
+  padding: 0.5em 2em;
   display: flex;
   flex-flow: row nowrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  font-size: calc(8px + 2vmin);
+  font-size: calc(4px + 2vmin);
   background-color: #282c34;
   color: white;
 }
 
 .header-container {
   width: 100%;
+}
+
+.header-left {
+  justify-self: flex-start;
+}
+
+.header-left h1 {
+  margin: 0;
 }
 
 .header-right {
@@ -20,11 +28,12 @@ header {
 }
 
 .header-right-container {
-  margin: 0 20px;
+  margin: 0 0.6em;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  font-size: calc(6px + 2vmin);
 }
 
 header a:hover,
@@ -36,13 +45,23 @@ header a:active {
 }
 
 .header-button {
-  padding: 0;
+  padding: 10px;
   height: 2em;
-  width: 2em;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 3px white solid;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.header-button:hover {
+  color: #44aaff;
+  border-color: #44aaff;
+  background-color: white;
+}
+
+.add-mask-button {
+  width: 2em;
+  font-family: 'Courier New', Courier, monospace;
 }

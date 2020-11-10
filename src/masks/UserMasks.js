@@ -16,6 +16,7 @@ class UserMasks extends React.Component {
       userMasks: [],
       selectedMask: null,
       showMaskDetails: false,
+      loading: true
     };
   }
 
@@ -25,7 +26,7 @@ class UserMasks extends React.Component {
 
       const userMasks = await this.props.userMasks;
       console.log(userMasks);
-      this.setState({ userMasks });
+      this.setState({ userMasks, loading: false });
     } catch (error) {
       console.error(error);
     }
@@ -52,6 +53,7 @@ class UserMasks extends React.Component {
         ) : (
           this.props.userMasks && (
             <UserMasksList
+              loading={this.state.loading}
               userMasks={this.state.userMasks}
               handleShowMaskDetails={this.handleShowMaskDetails}
             />
