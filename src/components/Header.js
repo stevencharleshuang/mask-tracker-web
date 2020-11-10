@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import { auth } from '../constants/firebase';
 import { connect } from 'react-redux';
 
@@ -19,20 +19,23 @@ const Header = (props) => {
 
   return (
     <header className="App-header">
+      {!props.isAuthenticated && <Redirect to="/login" />}
       <div className="header-left header-container">
       <Link to="/">
         <h1>Mask Tracker</h1>
       </Link>
       </div>
       <div className="header-right header-container">
+      {props.isAuthenticated && (
         <div className="header-right-container">
           <span
             className="header-button add-mask-button"
             onClick={() => props.history.push('/addmask')}
-          >
+            >
             <h3>+</h3>
           </span>
         </div>
+            )}
         <div className="header-right-container log-out-button">
           {props.isAuthenticated && (
             <span className="header-button" onClick={handleSignOut}>Sign Out</span>

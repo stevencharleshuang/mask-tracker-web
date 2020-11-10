@@ -18,6 +18,8 @@ header {
 }
 
 .header-left h1 {
+  text-align: left;
+  width: auto;
   margin: 0;
 }
 
@@ -38,10 +40,13 @@ header {
 
 header a:hover,
 header a:link,
-header a:visited,
-header a:active {
+header a:visited {
   color: white;
   text-decoration: none;
+}
+
+header a:active {
+  color: #44aaff;
 }
 
 .header-button {
@@ -55,10 +60,16 @@ header a:active {
   cursor: pointer;
 }
 
-.header-button:hover {
+/* .header-button:hover {
   color: #44aaff;
   border-color: #44aaff;
   background-color: white;
+} */
+
+.header-button:active {
+  color: #44aaff;
+  border-color: #44aaff;
+  background-color: #282c34;
 }
 
 .add-mask-button {
