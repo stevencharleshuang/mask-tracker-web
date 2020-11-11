@@ -43,6 +43,7 @@ class UserMasks extends React.Component {
   handleHideMaskDetails = () => this.setState({ selectedMask: null });
 
   handleDeleteMask = async (e) => {
+    this.setState({ loading: true });
     try {
       await this.props.deleteMask(e.target.id, this.state.userMasks);
       const userMasks = await this.props.userMasks;

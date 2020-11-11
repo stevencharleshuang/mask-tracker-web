@@ -46,7 +46,15 @@ class AddMask extends React.Component {
 
   handleSubmit = async () => {
     try {
-      const newMask = { ...this.state };
+      const newMask = {
+        brand: this.state.brand,
+        hoursRemaining: this.state.hoursRemaining,
+        hoursWorn: this.state.hoursWorn,
+        maskColor: this.state.maskColor,
+        maskNickname: this.state.maskNickname,
+        maskType: this.state.maskType,
+        totalHours: this.state.totalHours,
+      };
 
       newMask.hoursRemaining = newMask.totalHours - newMask.hoursWorn;
 
@@ -62,7 +70,6 @@ class AddMask extends React.Component {
   };
 
   render = () => {
-    console.log(this.state);
     return (
       <div className="add-mask">
         <h1>Add a mask to track</h1>
