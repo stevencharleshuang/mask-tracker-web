@@ -58,6 +58,8 @@ class AddMask extends React.Component {
     console.log(this.state);
     return (
       <div className="add-mask">
+        <h1>Add a mask to track</h1>
+      <div className="add-mask-container">
         <div className="mask-image-container">
           {this.state.brand === 'Happy Masks' && this.state.maskColor ? (
             <img
@@ -149,15 +151,16 @@ class AddMask extends React.Component {
           <div className="form-item">
             <button onClick={this.handleSubmit}>Submit</button>
           </div>
-          <button
+          {/* <button
             onClick={() => this.setState((prevState) => prevState.counter++)}
           >
             re-render
-          </button>
+          </button> */}
           <a href="#" onClick={() => this.props.history.push('/')}>
             Back from whence you came
           </a>
         </div>
+      </div>
       </div>
     );
   };

@@ -38,7 +38,7 @@ const Header = (props) => {
             )}
         <div className="header-right-container log-out-button">
           {props.isAuthenticated && (
-            <span className="header-button" onClick={handleSignOut}>Sign Out</span>
+            <span className="header-button" onClick={handleSignOut}>Log Out</span>
           )}
         </div>
       </div>

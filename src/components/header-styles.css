@@ -35,7 +35,7 @@ header {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  font-size: calc(6px + 2vmin);
+  font-size: calc(1px + 2vmin);
 }
 
 header a:hover,

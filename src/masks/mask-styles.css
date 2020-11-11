@@ -54,7 +54,7 @@
   width: auto;
 }
 
-.add-mask {
+.add-mask-container {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
