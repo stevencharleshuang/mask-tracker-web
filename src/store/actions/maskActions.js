@@ -2,6 +2,7 @@ import { auth, db, firebase } from '../../constants/firebase';
 
 export const GET_USER_MASKS = 'GET_USER_MASKS';
 export const ADD_MASK = 'ADD_MASK';
+export const DELETE_MASK = 'DELETE_MASK';
 
 export const getUserMasks = (uid) => async (dispatch) => {
   try {
@@ -19,11 +20,11 @@ export const getUserMasks = (uid) => async (dispatch) => {
   }
 };
 
-export const addMask = (payload) => async (dispatch) => {
+export const addMask = (maskDetails) => async (dispatch) => {
   try {
     const newMask = {
       ownerId: auth.currentUser.uid,
-      ...payload,
+      ...maskDetails,
       startDate: firebase.firestore.Timestamp.now(),
     };
 
@@ -31,6 +32,19 @@ export const addMask = (payload) => async (dispatch) => {
     await newMaskRef.set({ ...newMask, maskId: newMaskRef.id });
 
     return dispatch({ type: ADD_MASK, payload: newMask });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteMask = (maskId, userMasks) => async (dispatch) => {
+  try {
+    const deletedMaskRef = await db.collection('masks').doc(`/${maskId}`).get();
+    await deletedMaskRef.ref.delete();
+
+    const updatedUserMasks = userMasks.filter((mask) => mask.maskId !== maskId);
+
+    return dispatch({ type: DELETE_MASK, payload: updatedUserMasks });
   } catch (error) {
     console.error(error);
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import {capitalize} from '../utils/helperFunctions'
+import { capitalize } from '../utils/helperFunctions';
 
 const UserMaskDetails = (props) => {
   const {
@@ -11,7 +11,7 @@ const UserMaskDetails = (props) => {
     maskColor,
     maskNickname,
     maskType,
-    ownerId,
+    maskId,
     photoURL,
     startDate,
     totalHours,
@@ -34,7 +34,10 @@ const UserMaskDetails = (props) => {
             <li>Hours Remaining: {hoursRemaining} hours</li>
             {/* <li>Start Date: {startDate}</li> */}
           </ul>
-          <Link to="#" onClick={() => props.handleHideMaskDetails()}>
+          <button id={maskId} onClick={props.handleDeleteMask}>
+            Delete Mask
+          </button>
+          <Link to="#" onClick={props.handleHideMaskDetails}>
             Back to your masks
           </Link>
         </div>

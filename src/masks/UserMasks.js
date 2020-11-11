@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getUserMasks } from '../store/actions/maskActions';
+import { getUserMasks, deleteMask } from '../store/actions/maskActions';
 import { auth } from '../constants/firebase';
 
 import UserMasksList from './UserMasksList';
@@ -16,7 +16,7 @@ class UserMasks extends React.Component {
       userMasks: [],
       selectedMask: null,
       showMaskDetails: false,
-      loading: true
+      loading: true,
     };
   }
 
@@ -36,10 +36,26 @@ class UserMasks extends React.Component {
     const selectedMask = this.state.userMasks.filter(
       (mask) => mask.maskId === e.target.id
     );
+
     this.setState({ selectedMask: selectedMask[0] });
   };
 
   handleHideMaskDetails = () => this.setState({ selectedMask: null });
+
+  handleDeleteMask = async (e) => {
+    try {
+      await this.props.deleteMask(e.target.id, this.state.userMasks);
+      const userMasks = await this.props.userMasks;
+
+      this.setState({
+        userMasks,
+        selectedMask: null,
+        loading: false,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   render() {
     return (
@@ -49,6 +65,7 @@ class UserMasks extends React.Component {
           <UserMaskDetails
             mask={this.state.selectedMask}
             handleHideMaskDetails={this.handleHideMaskDetails}
+            handleDeleteMask={(e) => this.handleDeleteMask(e)}
           />
         ) : (
           this.props.userMasks && (
@@ -66,6 +83,7 @@ class UserMasks extends React.Component {
 
 const mapDispatchToProps = {
   getUserMasks,
+  deleteMask,
 };
 
 const mapStateToProps = (state) => ({
