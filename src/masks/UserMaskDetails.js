@@ -19,7 +19,23 @@ const UserMaskDetails = (props) => {
 
   return (
     <div className="mask-details">
-      <h3>{maskNickname}</h3>
+      <h1>{maskNickname}</h1>
+      <div className="mask-options">
+        <span
+          className="mask-options-button"
+          data-id={maskId}
+          onClick={() => {}}
+        >
+          Edit Mask
+        </span>
+        <span
+          className="mask-options-button"
+          data-id={maskId}
+          onClick={props.handleDeleteMask}
+        >
+          Delete Mask
+        </span>
+      </div>
       <div className="mask-details-container">
         <div className="mask-details-container-item-image">
           <img alt="mask image" className="mask-details-image" src={photoURL} />
@@ -34,14 +50,12 @@ const UserMaskDetails = (props) => {
             <li>Hours Remaining: {hoursRemaining} hours</li>
             {/* <li>Start Date: {startDate}</li> */}
           </ul>
-          <button id={maskId} onClick={props.handleDeleteMask}>
-            Delete Mask
-          </button>
-          <Link to="#" onClick={props.handleHideMaskDetails}>
-            Back to your masks
-          </Link>
         </div>
       </div>
+
+      <Link to="#" onClick={props.handleHideMaskDetails}>
+        Back to your masks
+      </Link>
     </div>
   );
 };

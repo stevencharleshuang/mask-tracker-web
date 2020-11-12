@@ -86,6 +86,9 @@ class Login extends React.Component {
             type="password"
             className="login login-password"
             onChange={(e) => this.handleInputChange(e)}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') this.handleSubmit();
+            }}
             value={this.state.formData.password}
           />
         </div>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const UserMasksList = (props) => {
   return (
     <div className="masks-list-container">
-      <h1>Your masks</h1>
+      <h1>Masks You Be Tracking</h1>
       <div className="masks-list">
         {props.userMasks.length > 0 ? (
           props.userMasks.map((mask, i) => (

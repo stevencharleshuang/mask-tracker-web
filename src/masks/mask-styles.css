@@ -1,11 +1,14 @@
 .user-masks {
   height: 100%;
   display: flex;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 }
 
 .loading-spinner {
+  height: 3em;
+  width: 3em;
 }
 
 .masks-list {
@@ -38,6 +41,13 @@
   cursor: pointer;
 }
 
+.mask-details {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .mask-details-container {
   display: flex;
   flex-flow: row nowrap;
@@ -51,7 +61,6 @@
 }
 
 .mask-details-container-item-details a {
-  text-align: left;
   text-decoration: none;
 }
 
@@ -62,6 +71,27 @@
 .mask-details-container img {
   height: 350px;
   width: auto;
+}
+
+.mask-options {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1em 0;
+}
+
+.mask-options-button {
+  margin: 0 5em;
+  padding: 0.4em;
+  border: 3px solid #44aaff;
+  color: #44aaff;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mask-options-button:active {
+  color: #48d;
+  border-color: #48d;
 }
 
 .add-mask-container {
