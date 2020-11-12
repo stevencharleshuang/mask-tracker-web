@@ -7,6 +7,7 @@ import { auth } from '../constants/firebase';
 import UserMasksList from './UserMasksList';
 import UserMaskDetails from './UserMaskDetails';
 
+import loading from '../assets/loading.gif';
 import './mask-styles.css';
 
 class UserMasks extends React.Component {
@@ -25,7 +26,7 @@ class UserMasks extends React.Component {
       await this.props.getUserMasks(auth.currentUser.uid);
 
       const userMasks = await this.props.userMasks;
-      console.log(userMasks);
+
       this.setState({ userMasks, loading: false });
     } catch (error) {
       console.error(error);
@@ -60,9 +61,15 @@ class UserMasks extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="user-masks">
         {!this.props.isAuthenticated && <Redirect to="/login" />}
-        {this.state.selectedMask ? (
+        {this.state.loading ? (
+          <img
+            className="loading-spinner"
+            src={loading}
+            alt="loading spinner"
+          />
+        ) : this.state.selectedMask ? (
           <UserMaskDetails
             mask={this.state.selectedMask}
             handleHideMaskDetails={this.handleHideMaskDetails}

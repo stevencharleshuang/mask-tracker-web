@@ -174,7 +174,7 @@ class AddMask extends React.Component {
           >
             re-render
           </button> */}
-            <a href="#" onClick={() => this.props.history.push('/')}>
+            <a href="#" onClick={() => this.props.history.goBack()}>
               Back from whence you came
             </a>
           </div>
