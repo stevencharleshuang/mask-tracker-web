@@ -45,7 +45,7 @@ export const updateMask = (maskId, userMasks, updatedMaskDetails) => async (
     // update mask on firebase
     // filter userMasks and return all masks except the one to be updated
     // add the updated mask to the updated masks arr
-    // return dispatch({ type: UPDATE_MASK, payload });
+    // return dispatch({ type: UPDATE_MASK, payload: updatedUserMasks });
   } catch (error) {
     console.error(error);
   }

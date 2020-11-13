@@ -43,7 +43,14 @@ class UserMasks extends React.Component {
 
   handleHideMaskDetails = () => this.setState({ selectedMask: null });
 
-  handleEditMask = (e) => this.props.history.push('/editmask');
+  handleEditMask = (e) =>
+    this.props.history.push({
+      pathname: '/editmask',
+      state: {
+        selectedMask: this.state.selectedMask,
+        userMasks: this.state.userMasks,
+      },
+    });
 
   handleDeleteMask = async (e) => {
     this.setState({ loading: true });
