@@ -42,14 +42,18 @@ class EditMask extends React.Component {
   componentDidMount = () => {};
 
   // TODO: Add change handler
-  handleChange = () => {};
+  handleChange = (e) => {};
 
   // TODO: Add submit handler
-  handleSubmit = () => {
-    const [maskId, userMasks] = [this.state.maskId, this.state.userMasks];
-    const updatedMaskDetails = { ...this.state.maskDetails };
-    // Call redux action
-    this.props.updateMask(maskId, userMasks, updatedMaskDetails);
+  handleSubmit = async () => {
+    try {
+      const [maskId, userMasks] = [this.state.maskId, this.state.userMasks];
+      const updatedMaskDetails = { ...this.state.maskDetails };
+      // Call redux action
+      this.props.updateMask(maskId, userMasks, updatedMaskDetails);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   render() {
