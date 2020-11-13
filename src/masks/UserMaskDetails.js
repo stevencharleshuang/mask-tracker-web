@@ -24,7 +24,7 @@ const UserMaskDetails = (props) => {
         <span
           className="mask-options-button"
           data-id={maskId}
-          onClick={() => {}}
+          onClick={props.handleEditMask}
         >
           Edit Mask
         </span>
