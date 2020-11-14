@@ -42,10 +42,14 @@ export const updateMask = (maskId, userMasks, updatedMaskDetails) => async (
   dispatch
 ) => {
   try {
+    console.log({ maskId, userMasks, updatedMaskDetails });
     // update mask on firebase
+    await db.collection('masks').doc(`/${maskId}`).update(updatedMaskDetails);
     // filter userMasks and return all masks except the one to be updated
+    const updatedUserMasks = userMasks.filter((mask) => mask.id !== maskId);
     // add the updated mask to the updated masks arr
-    // return dispatch({ type: UPDATE_MASK, payload: updatedUserMasks });
+    updatedUserMasks.push(updatedMaskDetails);
+    return dispatch({ type: UPDATE_MASK, payload: updatedUserMasks });
   } catch (error) {
     console.error(error);
   }
