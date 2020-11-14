@@ -22,7 +22,9 @@ const UserMaskDetails = (props) => {
   useEffect(() => {
     setMaskDetails({ ...props.selectedMask });
   }, []);
-  console.log(maskDetails);
+
+  // TODO: The component is rendering twice for some reason... hooks hijinks?
+  // console.log(maskDetails);
 
   return (
     <div className="mask-details">
@@ -30,14 +32,14 @@ const UserMaskDetails = (props) => {
       <div className="mask-options">
         <span
           className="mask-options-button"
-          data-id={maskId}
+          data-id={maskDetails.maskId}
           onClick={props.handleEditMask}
         >
           Edit Mask
         </span>
         <span
           className="mask-options-button"
-          data-id={maskId}
+          data-id={maskDetails.maskId}
           onClick={props.handleDeleteMask}
         >
           Delete Mask
@@ -45,7 +47,11 @@ const UserMaskDetails = (props) => {
       </div>
       <div className="mask-details-container">
         <div className="mask-details-container-item-image">
-          <img alt="mask image" className="mask-details-image" src={photoURL} />
+          <img
+            alt="mask image"
+            className="mask-details-image"
+            src={maskDetails.photoURL}
+          />
         </div>
         <div className="mask-details-container-item-details">
           <ul>
