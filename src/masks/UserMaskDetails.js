@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { capitalize } from '../utils/helperFunctions';
 
 const UserMaskDetails = (props) => {
+  const [maskDetails, setMaskDetails] = useState({});
   const {
     brand,
     hoursRemaining,
@@ -17,9 +19,14 @@ const UserMaskDetails = (props) => {
     totalHours,
   } = { ...props.mask };
 
+  useEffect(() => {
+    setMaskDetails({ ...props.selectedMask });
+  }, []);
+  console.log(maskDetails);
+
   return (
     <div className="mask-details">
-      <h1>{maskNickname}</h1>
+      <h1>{maskDetails.maskNickname}</h1>
       <div className="mask-options">
         <span
           className="mask-options-button"
@@ -42,12 +49,12 @@ const UserMaskDetails = (props) => {
         </div>
         <div className="mask-details-container-item-details">
           <ul>
-            <li>Brand: {capitalize(brand)}</li>
-            <li>Mask Color: {capitalize(maskColor)}</li>
-            <li>Mask Type: {capitalize(maskType)}</li>
-            <li>Total Hours: {totalHours} hours</li>
-            <li>Hours Worn: {hoursWorn} hours</li>
-            <li>Hours Remaining: {hoursRemaining} hours</li>
+            <li>Brand: {capitalize(maskDetails.brand)}</li>
+            <li>Mask Color: {capitalize(maskDetails.maskColor)}</li>
+            <li>Mask Type: {capitalize(maskDetails.maskType)}</li>
+            <li>Total Hours: {maskDetails.totalHours} hours</li>
+            <li>Hours Worn: {maskDetails.hoursWorn} hours</li>
+            <li>Hours Remaining: {maskDetails.hoursRemaining} hours</li>
             {/* <li>Start Date: {startDate}</li> */}
           </ul>
         </div>
@@ -60,4 +67,8 @@ const UserMaskDetails = (props) => {
   );
 };
 
-export default UserMaskDetails;
+const mapStateToProps = (state) => ({
+  selectedMask: state.masks.selectedMask,
+});
+
+export default connect(mapStateToProps)(UserMaskDetails);

@@ -54,7 +54,7 @@ class EditMask extends React.Component {
     try {
       const [maskId, userMasks] = [this.state.maskId, this.state.userMasks];
       const updatedMaskDetails = { ...this.state.maskDetails };
-      // Call redux action
+
       this.props.updateMask(maskId, userMasks, updatedMaskDetails);
     } catch (error) {
       console.error(error);
@@ -160,9 +160,6 @@ class EditMask extends React.Component {
                 onChange={(e) => this.handleChange(e, true)}
                 value={this.state.maskDetails.hoursWorn}
               />
-            </div>
-            <div className="form-item">
-              <button onClick={this.handleReset}>Reset</button>
             </div>
             <div className="form-item">
               <button onClick={this.handleSubmit}>Submit</button>

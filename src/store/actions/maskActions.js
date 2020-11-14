@@ -4,6 +4,7 @@ export const ADD_MASK = 'ADD_MASK';
 export const GET_USER_MASKS = 'GET_USER_MASKS';
 export const UPDATE_MASK = 'UPDATE_MASK';
 export const DELETE_MASK = 'DELETE_MASK';
+export const SELECT_MASK = 'SELECT_MASK';
 
 export const addMask = (maskDetails) => async (dispatch) => {
   try {
@@ -42,13 +43,12 @@ export const updateMask = (maskId, userMasks, updatedMaskDetails) => async (
   dispatch
 ) => {
   try {
-    console.log({ maskId, userMasks, updatedMaskDetails });
-    // update mask on firebase
     await db.collection('masks').doc(`/${maskId}`).update(updatedMaskDetails);
-    // filter userMasks and return all masks except the one to be updated
+
     const updatedUserMasks = userMasks.filter((mask) => mask.id !== maskId);
-    // add the updated mask to the updated masks arr
+
     updatedUserMasks.push(updatedMaskDetails);
+
     return dispatch({ type: UPDATE_MASK, payload: updatedUserMasks });
   } catch (error) {
     console.error(error);
@@ -67,3 +67,8 @@ export const deleteMask = (maskId, userMasks) => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const selectMask = (selectedMask = null) => ({
+  type: SELECT_MASK,
+  payload: selectedMask,
+});

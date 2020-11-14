@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getUserMasks, deleteMask } from '../store/actions/maskActions';
+import {
+  getUserMasks,
+  deleteMask,
+  selectMask,
+} from '../store/actions/maskActions';
 import { auth } from '../constants/firebase';
 
 import UserMasksList from './UserMasksList';
@@ -33,15 +37,18 @@ class UserMasks extends React.Component {
     }
   }
 
-  handleShowMaskDetails = (e) => {
+  handleShowMaskDetails = async (e) => {
     const selectedMask = this.state.userMasks.filter(
       (mask) => mask.maskId === e.target.id
     );
 
+    await this.props.selectMask(selectedMask[0]);
+
     this.setState({ selectedMask: selectedMask[0] });
   };
 
-  handleHideMaskDetails = () => this.setState({ selectedMask: null });
+  handleHideMaskDetails = () =>
+    this.setState({ selectedMask: null }, () => this.props.selectMask());
 
   handleEditMask = (e) =>
     this.props.history.push({
@@ -58,11 +65,14 @@ class UserMasks extends React.Component {
       await this.props.deleteMask(e.target.dataset.id, this.state.userMasks);
       const userMasks = await this.props.userMasks;
 
-      this.setState({
-        userMasks,
-        selectedMask: null,
-        loading: false,
-      });
+      this.setState(
+        {
+          userMasks,
+          selectedMask: null,
+          loading: false,
+        },
+        () => this.props.selectMask()
+      );
     } catch (error) {
       console.error(error);
     }
@@ -102,11 +112,12 @@ class UserMasks extends React.Component {
 const mapDispatchToProps = {
   getUserMasks,
   deleteMask,
+  selectMask,
 };
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.user.isAuthenticated,
-  userMasks: state.mask.userMasks,
+  userMasks: state.masks.userMasks,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserMasks);

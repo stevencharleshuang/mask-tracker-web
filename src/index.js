@@ -13,7 +13,7 @@ import maskReducer from './store/reducers/maskReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
-  mask: maskReducer,
+  masks: maskReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

@@ -3,10 +3,12 @@ import {
   GET_USER_MASKS,
   UPDATE_MASK,
   DELETE_MASK,
+  SELECT_MASK,
 } from '../actions/maskActions';
 
 const initialState = {
   userMasks: [],
+  selectedMask: null,
 };
 
 const maskReducer = (state = initialState, action) => {
@@ -30,6 +32,11 @@ const maskReducer = (state = initialState, action) => {
       return {
         ...state,
         userMasks: action.payload,
+      };
+    case SELECT_MASK:
+      return {
+        ...state,
+        selectedMask: action.payload,
       };
     default:
       return state;
