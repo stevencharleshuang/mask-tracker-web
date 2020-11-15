@@ -94,21 +94,24 @@
   border-color: #48d;
 }
 
-.add-mask-container {
+.add-mask-container,
+.edit-mask-container {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.add-mask .form-container {
+.add-mask .form-container,
+.edit-mask .form-container {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 }
 
-.add-mask .form-container .form-item {
+.add-mask .form-container .form-item,
+.edit-mask .form-container .form-item {
   margin: 10px auto;
 }
 

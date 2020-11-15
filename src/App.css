@@ -9,6 +9,16 @@
   flex-flow: column nowrap;
 }
 
+.app-link {
+  color: #44aaff;
+  cursor: pointer;
+}
+
+.app-link :active {
+  color: #48d;
+  border-color: #48d;
+}
+
 h1,
 h2,
 h3,

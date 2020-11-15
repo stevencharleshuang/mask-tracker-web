@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Moment from 'moment';
 
 import { addMask } from '../store/actions/maskActions';
 
@@ -169,14 +168,12 @@ class AddMask extends React.Component {
             <div className="form-item">
               <button onClick={this.handleSubmit}>Submit</button>
             </div>
-            {/* <button
-            onClick={() => this.setState((prevState) => prevState.counter++)}
-          >
-            re-render
-          </button> */}
-            <a href="#" onClick={() => this.props.history.goBack()}>
+            <span
+              className="app-link"
+              onClick={() => this.props.history.goBack()}
+            >
               Back from whence you came
-            </a>
+            </span>
           </div>
         </div>
       </div>

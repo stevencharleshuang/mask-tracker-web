@@ -35,8 +35,6 @@ class EditMask extends React.Component {
         userMasks: this.props.userMasks,
       };
     }
-
-    console.log(this.state);
   }
 
   componentDidMount = () => {};
@@ -65,7 +63,7 @@ class EditMask extends React.Component {
         <h1>Edit Mask</h1>
         {!this.state && <h4>Something is amiss here...</h4>}
         {/* TODO: render form with fields placeheld by state */}
-        <div className="add-mask-container">
+        <div className="edit-mask-container">
           <div className="mask-image-container">
             {this.state.maskDetails.brand === 'Happy Masks' &&
             this.state.maskDetails.maskColor ? (
@@ -162,11 +160,6 @@ class EditMask extends React.Component {
             <div className="form-item">
               <button onClick={this.handleSubmit}>Submit</button>
             </div>
-            {/* <button
-            onClick={() => this.setState((prevState) => prevState.counter++)}
-          >
-            re-render
-          </button> */}
             <Link to="/usermaskdetails">Back from whence you came</Link>
           </div>
         </div>
