@@ -4,14 +4,17 @@ import { connect } from 'react-redux';
 
 import { deleteMask, deselectMask } from '../store/actions/maskActions';
 import { capitalize } from '../utils/helperFunctions';
+import loadingSpinner from '../assets/loading.gif';
 
 const UserMaskDetails = (props) => {
+  const [loading, setLoading] = useState(true);
   const [maskDetails, setMaskDetails] = useState({});
   const [userMasks, setUserMasks] = useState([]);
 
   useEffect(() => {
     setMaskDetails({ ...props.selectedMask });
     setUserMasks(props.userMasks);
+    setLoading(false);
   }, []);
 
   // TODO: The component is rendering twice for some reason... hooks hijinks?
@@ -41,47 +44,59 @@ const UserMaskDetails = (props) => {
 
   return (
     <div className="mask-details">
-      <h1>{maskDetails.maskNickname}</h1>
-      <div className="mask-options">
-        <span
-          className="mask-options-button"
-          data-id={maskDetails.maskId}
-          onClick={handleEditMask}
-        >
-          Edit Mask
-        </span>
-        <span
-          className="mask-options-button"
-          data-id={maskDetails.maskId}
-          onClick={(e) => handleDeleteMask(e)}
-        >
-          Delete Mask
-        </span>
-      </div>
-      <div className="mask-details-container">
-        <div className="mask-details-container-item-image">
+      {loading ? (
+        <div className="app-loading-spinner-wrapper">
           <img
-            alt="mask image"
-            className="mask-details-image"
-            src={maskDetails.photoURL}
+            className="app-loading-spinner"
+            src={loadingSpinner}
+            alt="app-loading spinner"
           />
         </div>
-        <div className="mask-details-container-item-details">
-          <ul>
-            <li>Brand: {capitalize(maskDetails.brand)}</li>
-            <li>Mask Color: {capitalize(maskDetails.maskColor)}</li>
-            <li>Mask Type: {capitalize(maskDetails.maskType)}</li>
-            <li>Total Hours: {maskDetails.totalHours} hours</li>
-            <li>Hours Worn: {maskDetails.hoursWorn} hours</li>
-            <li>Hours Remaining: {maskDetails.hoursRemaining} hours</li>
-            {/* <li>Start Date: {startDate}</li> */}
-          </ul>
-        </div>
-      </div>
+      ) : (
+        <div className="mask-details">
+          <h1>{maskDetails.maskNickname}</h1>
+          <div className="mask-options">
+            <span
+              className="mask-options-button"
+              data-id={maskDetails.maskId}
+              onClick={handleEditMask}
+            >
+              Edit Mask
+            </span>
+            <span
+              className="mask-options-button"
+              data-id={maskDetails.maskId}
+              onClick={(e) => handleDeleteMask(e)}
+            >
+              Delete Mask
+            </span>
+          </div>
+          <div className="mask-details-container">
+            <div className="mask-details-container-item-image">
+              <img
+                alt="mask image"
+                className="mask-details-image"
+                src={maskDetails.photoURL}
+              />
+            </div>
+            <div className="mask-details-container-item-details">
+              <ul>
+                <li>Brand: {capitalize(maskDetails.brand)}</li>
+                <li>Mask Color: {capitalize(maskDetails.maskColor)}</li>
+                <li>Mask Type: {capitalize(maskDetails.maskType)}</li>
+                <li>Total Hours: {maskDetails.totalHours} hours</li>
+                <li>Hours Worn: {maskDetails.hoursWorn} hours</li>
+                <li>Hours Remaining: {maskDetails.hoursRemaining} hours</li>
+                {/* <li>Start Date: {startDate}</li> */}
+              </ul>
+            </div>
+          </div>
 
-      <Link to="/usermasks" onClick={() => props.deselectMask()}>
-        Back to your masks
-      </Link>
+          <Link to="/usermasks" onClick={() => props.deselectMask()}>
+            Back to your masks
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

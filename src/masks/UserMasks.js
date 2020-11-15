@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   getUserMasks,
@@ -10,7 +10,7 @@ import { auth } from '../constants/firebase';
 
 import UserMasksList from './UserMasksList';
 
-import loading from '../assets/loading.gif';
+import loadingSpinner from '../assets/loading.gif';
 import './mask-styles.css';
 
 class UserMasks extends React.Component {
@@ -42,8 +42,8 @@ class UserMasks extends React.Component {
         {!this.props.isAuthenticated && <Redirect to="/login" />}
         {this.state.loading ? (
           <img
-            className="loading-spinner"
-            src={loading}
+            className="app-loading-spinner"
+            src={loadingSpinner}
             alt="loading spinner"
           />
         ) : (

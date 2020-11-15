@@ -36,7 +36,13 @@ main a:visited {
   text-decoration: none;
 }
 
-.loading-spinner {
+.app-loading-spinner {
   height: 5em;
   width: auto;
+}
+
+.app-loading-spinner-wrapper {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 }

@@ -6,11 +6,6 @@
   align-items: center;
 }
 
-.loading-spinner {
-  height: 3em;
-  width: 3em;
-}
-
 .masks-list {
   padding: 0 50px;
   display: flex;
@@ -46,6 +41,7 @@
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
 .mask-details-container {
@@ -61,6 +57,7 @@
 }
 
 .mask-details-container-item-details a {
+  text-align: center;
   text-decoration: none;
 }
 
