@@ -50,6 +50,9 @@ class EditMask extends React.Component {
       const [maskId, userMasks] = [this.state.maskId, this.state.userMasks];
       const updatedMaskDetails = { ...this.state.maskDetails };
 
+      updatedMaskDetails.hoursRemaining =
+        updatedMaskDetails.totalHours - updatedMaskDetails.hoursWorn;
+
       await this.props.updateMask(maskId, userMasks, updatedMaskDetails);
       await this.props.history.push({ pathname: '/usermaskdetails' });
     } catch (error) {
