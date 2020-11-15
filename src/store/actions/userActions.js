@@ -1,4 +1,4 @@
-import { auth, db } from '../../constants/firebase';
+// import { auth, db } from '../../constants/firebase';
 
 export const SET_IS_AUTHENTICATED = 'SET_IS_AUTHENTICATED';
 export const SET_USER_DATA = 'SET_USER_DATA';

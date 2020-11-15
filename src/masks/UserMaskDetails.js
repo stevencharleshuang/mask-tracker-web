@@ -15,7 +15,7 @@ const UserMaskDetails = (props) => {
     setMaskDetails({ ...props.selectedMask });
     setUserMasks(props.userMasks);
     setLoading(false);
-  }, []);
+  }, [props.selectedMask, props.userMasks]);
 
   // TODO: The component is rendering twice for some reason... hooks hijinks?
   // console.log(maskDetails);
@@ -74,7 +74,7 @@ const UserMaskDetails = (props) => {
           <div className="mask-details-container">
             <div className="mask-details-container-item-image">
               <img
-                alt="mask image"
+                alt="mask"
                 className="mask-details-image"
                 src={maskDetails.photoURL}
               />
@@ -86,7 +86,21 @@ const UserMaskDetails = (props) => {
                 <li>Mask Type: {capitalize(maskDetails.maskType)}</li>
                 <li>Total Hours: {maskDetails.totalHours} hours</li>
                 <li>Hours Worn: {maskDetails.hoursWorn} hours</li>
-                <li>Hours Remaining: {maskDetails.hoursRemaining} hours</li>
+                <li>
+                  Hours Remaining:{' '}
+                  {maskDetails.hoursRemaining <= 0 ? (
+                    <span className="app-warning-text">
+                      Expired
+                      <br />
+                      <br />
+                      Time for a new mask, maybe?
+                    </span>
+                  ) : (
+                    <span className="app-okay-text">
+                      {maskDetails.hoursRemaining} hours
+                    </span>
+                  )}
+                </li>
                 {/* <li>Start Date: {startDate}</li> */}
               </ul>
             </div>

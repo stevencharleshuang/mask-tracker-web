@@ -10,13 +10,13 @@
 }
 
 .app-link {
+  font-weight: 500;
   color: #44aaff;
   cursor: pointer;
 }
 
-.app-link :active {
+.app-link:active {
   color: #48d;
-  border-color: #48d;
 }
 
 h1,
@@ -26,13 +26,25 @@ h4 {
   text-align: center;
 }
 
+main h1,
+main h2,
+main h3,
+main h4 {
+  color: #48e;
+}
+
 main {
   flex: 1;
 }
 
 main a:link,
 main a:visited {
+  font-weight: 500;
   color: #44aaff;
+  text-decoration: none;
+}
+main a:active {
+  color: #48d;
   text-decoration: none;
 }
 
@@ -46,3 +58,32 @@ main a:visited {
   justify-content: center;
   align-items: center;
 }
+
+.app-warning-text {
+  color: #ff6622;
+}
+
+.app-okay-text {
+  color: #229922;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'] {
+  text-align: center;
+  width: 12em;
+  border: none;
+  border-bottom: 1.5px solid black;
+}
+
+input[type='number'] {
+  text-align: center;
+  padding-left: 1em;
+  border: none;
+  width: 5em;
+  border-bottom: 1.5px solid black;
+}
+
+/* label {
+  text-align: center;
+} */

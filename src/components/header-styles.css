@@ -38,7 +38,6 @@ header {
   font-size: calc(1px + 2vmin);
 }
 
-header a:hover,
 header a:link,
 header a:visited {
   color: white;

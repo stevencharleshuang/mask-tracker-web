@@ -168,12 +168,9 @@ class AddMask extends React.Component {
             <div className="form-item">
               <button onClick={this.handleSubmit}>Submit</button>
             </div>
-            <span
-              className="app-link"
-              onClick={() => this.props.history.goBack()}
-            >
+            <a className="app-link" onClick={() => this.props.history.goBack()}>
               Back from whence you came
-            </span>
+            </a>
           </div>
         </div>
       </div>
