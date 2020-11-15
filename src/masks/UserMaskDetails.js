@@ -2,29 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { deleteMask, deselectMask } from '../store/actions/maskActions';
 import { capitalize } from '../utils/helperFunctions';
 
 const UserMaskDetails = (props) => {
   const [maskDetails, setMaskDetails] = useState({});
-  const {
-    brand,
-    hoursRemaining,
-    hoursWorn,
-    maskColor,
-    maskNickname,
-    maskType,
-    maskId,
-    photoURL,
-    startDate,
-    totalHours,
-  } = { ...props.mask };
+  const [userMasks, setUserMasks] = useState([]);
 
   useEffect(() => {
     setMaskDetails({ ...props.selectedMask });
+    setUserMasks(props.userMasks);
   }, []);
 
   // TODO: The component is rendering twice for some reason... hooks hijinks?
   // console.log(maskDetails);
+
+  const handleEditMask = () =>
+    props.history.push({
+      pathname: '/editmask',
+      state: {
+        selectedMask: maskDetails,
+        userMasks,
+      },
+    });
+
+  const handleDeleteMask = async (e) => {
+    try {
+      await props.deleteMask(e.target.dataset.id, userMasks);
+
+      await props.deselectMask();
+      await props.history.push({
+        pathname: '/usermasks',
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="mask-details">
@@ -33,14 +46,14 @@ const UserMaskDetails = (props) => {
         <span
           className="mask-options-button"
           data-id={maskDetails.maskId}
-          onClick={props.handleEditMask}
+          onClick={handleEditMask}
         >
           Edit Mask
         </span>
         <span
           className="mask-options-button"
           data-id={maskDetails.maskId}
-          onClick={props.handleDeleteMask}
+          onClick={(e) => handleDeleteMask(e)}
         >
           Delete Mask
         </span>
@@ -66,7 +79,7 @@ const UserMaskDetails = (props) => {
         </div>
       </div>
 
-      <Link to="#" onClick={props.handleHideMaskDetails}>
+      <Link to="/usermasks" onClick={() => props.deselectMask()}>
         Back to your masks
       </Link>
     </div>
@@ -75,6 +88,12 @@ const UserMaskDetails = (props) => {
 
 const mapStateToProps = (state) => ({
   selectedMask: state.masks.selectedMask,
+  userMasks: state.masks.userMasks,
 });
 
-export default connect(mapStateToProps)(UserMaskDetails);
+const mapDispatchToProps = {
+  deleteMask,
+  deselectMask,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserMaskDetails);

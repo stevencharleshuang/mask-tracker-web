@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { updateMask } from '../store/actions/maskActions';
@@ -8,9 +9,7 @@ class EditMask extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
-
-    if (this.props.location.state) {
+    if (this.props.selectedMask) {
       const {
         brand,
         hoursRemaining,
@@ -20,7 +19,7 @@ class EditMask extends React.Component {
         maskNickname,
         maskType,
         totalHours,
-      } = this.props.location.state.selectedMask;
+      } = this.props.selectedMask;
 
       this.state = {
         maskId: maskId ? maskId : null,
@@ -33,7 +32,7 @@ class EditMask extends React.Component {
           maskType: maskType ? maskType : 'reusable',
           totalHours: totalHours ? totalHours : 0,
         },
-        userMasks: this.props.location.state.userMasks,
+        userMasks: this.props.userMasks,
       };
     }
 
@@ -42,20 +41,19 @@ class EditMask extends React.Component {
 
   componentDidMount = () => {};
 
-  // TODO: Add change handler
   handleChange = (e) => {
     this.setState(
       (prevState) => (prevState.maskDetails[e.target.name] = e.target.value)
     );
   };
 
-  // TODO: Add submit handler
   handleSubmit = async () => {
     try {
       const [maskId, userMasks] = [this.state.maskId, this.state.userMasks];
       const updatedMaskDetails = { ...this.state.maskDetails };
 
-      this.props.updateMask(maskId, userMasks, updatedMaskDetails);
+      await this.props.updateMask(maskId, userMasks, updatedMaskDetails);
+      await this.props.history.push({ pathname: '/usermaskdetails' });
     } catch (error) {
       console.error(error);
     }
@@ -169,9 +167,7 @@ class EditMask extends React.Component {
           >
             re-render
           </button> */}
-            <a href="#" onClick={() => this.props.history.goBack()}>
-              Back from whence you came
-            </a>
+            <Link to="/usermaskdetails">Back from whence you came</Link>
           </div>
         </div>
       </div>
@@ -179,8 +175,13 @@ class EditMask extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  selectedMask: state.masks.selectedMask,
+  userMasks: state.masks.userMasks,
+});
+
 const mapDispatchToProps = {
   updateMask,
 };
 
-export default connect(null, mapDispatchToProps)(EditMask);
+export default connect(mapStateToProps, mapDispatchToProps)(EditMask);

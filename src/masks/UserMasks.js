@@ -9,7 +9,6 @@ import {
 import { auth } from '../constants/firebase';
 
 import UserMasksList from './UserMasksList';
-import UserMaskDetails from './UserMaskDetails';
 
 import loading from '../assets/loading.gif';
 import './mask-styles.css';
@@ -37,47 +36,6 @@ class UserMasks extends React.Component {
     }
   }
 
-  handleShowMaskDetails = async (e) => {
-    const selectedMask = this.state.userMasks.filter(
-      (mask) => mask.maskId === e.target.id
-    );
-
-    await this.props.selectMask(selectedMask[0]);
-
-    this.setState({ selectedMask: selectedMask[0] });
-  };
-
-  handleHideMaskDetails = () =>
-    this.setState({ selectedMask: null }, () => this.props.selectMask());
-
-  handleEditMask = (e) =>
-    this.props.history.push({
-      pathname: '/editmask',
-      state: {
-        selectedMask: this.state.selectedMask,
-        userMasks: this.state.userMasks,
-      },
-    });
-
-  handleDeleteMask = async (e) => {
-    this.setState({ loading: true });
-    try {
-      await this.props.deleteMask(e.target.dataset.id, this.state.userMasks);
-      const userMasks = await this.props.userMasks;
-
-      this.setState(
-        {
-          userMasks,
-          selectedMask: null,
-          loading: false,
-        },
-        () => this.props.selectMask()
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   render() {
     return (
       <div className="user-masks">
@@ -88,19 +46,11 @@ class UserMasks extends React.Component {
             src={loading}
             alt="loading spinner"
           />
-        ) : this.state.selectedMask ? (
-          <UserMaskDetails
-            mask={this.state.selectedMask}
-            handleHideMaskDetails={this.handleHideMaskDetails}
-            handleEditMask={(e) => this.handleEditMask(e)}
-            handleDeleteMask={(e) => this.handleDeleteMask(e)}
-          />
         ) : (
           this.props.userMasks && (
             <UserMasksList
               loading={this.state.loading}
               userMasks={this.state.userMasks}
-              handleShowMaskDetails={this.handleShowMaskDetails}
             />
           )
         )}

@@ -5,6 +5,7 @@ export const GET_USER_MASKS = 'GET_USER_MASKS';
 export const UPDATE_MASK = 'UPDATE_MASK';
 export const DELETE_MASK = 'DELETE_MASK';
 export const SELECT_MASK = 'SELECT_MASK';
+export const DESELECT_MASK = 'DESELECT_MASK';
 
 export const addMask = (maskDetails) => async (dispatch) => {
   try {
@@ -71,4 +72,9 @@ export const deleteMask = (maskId, userMasks) => async (dispatch) => {
 export const selectMask = (selectedMask = null) => ({
   type: SELECT_MASK,
   payload: selectedMask,
+});
+
+export const deselectMask = () => ({
+  type: DESELECT_MASK,
+  payload: null,
 });

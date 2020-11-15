@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { selectMask } from '../store/actions/maskActions';
 
 const UserMasksList = (props) => {
   return (
@@ -8,24 +11,25 @@ const UserMasksList = (props) => {
       <div className="masks-list">
         {props.userMasks.length > 0 ? (
           props.userMasks.map((mask, i) => (
-            <div
-              id={mask.maskId}
-              data-maskid={mask.maskId}
-              data-brand={mask.brand}
-              key={mask.maskId}
-              className="masks-list-item"
-              onClick={(e) => props.handleShowMaskDetails(e)}
-            >
-              <h4 className="masks-list-title" id={mask.maskId}>
-                {mask.maskNickname}
-              </h4>
-              <img
-                className="masks-list-image"
+            <Link to="/usermaskdetails" key={mask.maskId}>
+              <div
                 id={mask.maskId}
-                alt="mask"
-                src={mask.photoURL}
-              />
-            </div>
+                data-maskid={mask.maskId}
+                data-brand={mask.brand}
+                className="masks-list-item"
+                onClick={() => props.selectMask(mask)}
+              >
+                <h4 className="masks-list-title" id={mask.maskId}>
+                  {mask.maskNickname}
+                </h4>
+                <img
+                  className="masks-list-image"
+                  id={mask.maskId}
+                  alt="mask"
+                  src={mask.photoURL}
+                />
+              </div>
+            </Link>
           ))
         ) : (
           <div className="masks-list-null">
@@ -39,4 +43,8 @@ const UserMasksList = (props) => {
   );
 };
 
-export default UserMasksList;
+const mapDispatchToProps = {
+  selectMask,
+};
+
+export default connect(null, mapDispatchToProps)(UserMasksList);

@@ -9,6 +9,7 @@ import Login from './auth/Login';
 import UserMasks from './masks/UserMasks';
 import AddMask from './masks/AddMask';
 import EditMask from './masks/EditMask';
+import UserMaskDetails from './masks/UserMaskDetails';
 
 const history = createBrowserHistory();
 
@@ -24,6 +25,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/usermasks" component={UserMasks} />
             <Route exact path="/addmask" component={AddMask} />
+            <Route exact path="/usermaskdetails" component={UserMaskDetails} />
             <Route exact path="/editmask" component={EditMask} />
           </Switch>
         </main>
