@@ -76,7 +76,8 @@
   margin: 1em 0;
 }
 
-.mask-options-button {
+.mask-options-button,
+.edit-mask-button {
   text-align: center;
   margin: 0 5em;
   padding: 0.4em;
@@ -87,7 +88,8 @@
   cursor: pointer;
 }
 
-.mask-options-button:active {
+.mask-options-button:active,
+.edit-mask-button:active {
   color: #48d;
   border-color: #48d;
 }
@@ -111,6 +113,11 @@
 .add-mask .form-container .form-item,
 .edit-mask .form-container .form-item {
   margin: 10px auto;
+  text-align: center;
+}
+
+.edit-mask-button-wrapper {
+  margin: 3em auto;
 }
 
 .mask-image-container img {

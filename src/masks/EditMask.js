@@ -19,6 +19,7 @@ class EditMask extends React.Component {
         maskNickname,
         maskType,
         totalHours,
+        photoURL,
       } = this.props.selectedMask;
 
       this.state = {
@@ -31,6 +32,7 @@ class EditMask extends React.Component {
           maskNickname: maskNickname ? maskNickname : '',
           maskType: maskType ? maskType : 'reusable',
           totalHours: totalHours ? totalHours : 0,
+          photoURL: photoURL ? photoURL : '',
         },
         userMasks: this.props.userMasks,
       };
@@ -54,7 +56,10 @@ class EditMask extends React.Component {
         updatedMaskDetails.totalHours - updatedMaskDetails.hoursWorn;
 
       await this.props.updateMask(maskId, userMasks, updatedMaskDetails);
-      await this.props.history.push({ pathname: '/usermaskdetails' });
+      await this.props.history.push({
+        pathname: '/usermaskdetails',
+        state: { ...updatedMaskDetails },
+      });
     } catch (error) {
       console.error(error);
     }
@@ -160,8 +165,10 @@ class EditMask extends React.Component {
                 value={this.state.maskDetails.hoursWorn}
               />
             </div>
-            <div className="form-item">
-              <button onClick={this.handleSubmit}>Submit</button>
+            <div className="edit-mask-button-wrapper">
+              <span className="edit-mask-button" onClick={this.handleSubmit}>
+                Submit
+              </span>
             </div>
             <Link to="/usermaskdetails">Back from whence you came</Link>
           </div>

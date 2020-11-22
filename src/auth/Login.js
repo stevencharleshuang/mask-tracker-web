@@ -65,6 +65,9 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login-container">
+        <div className="login-header">
+          <h2>Let's go track your masks</h2>
+        </div>
         <div className="login-form">
           <input
             autoCapitalize="off"
@@ -92,14 +95,18 @@ class Login extends React.Component {
             value={this.state.formData.password}
           />
         </div>
-        <div className="button-wrapper">
-          <button onClick={this.handleSubmit}>Log In</button>
-        </div>
-        <div className="error-container">
-          {this.state.error && <h4>{this.state.error}</h4>}
+        <div className="login-button-wrapper">
+          <span className="login-button" onClick={this.handleSubmit}>
+            Log In
+          </span>
         </div>
         <div>
           Don't have an account? <Link to="register">Sign Up</Link>
+        </div>
+        <div className="error-container">
+          {this.state.error && (
+            <span className="error-message">{this.state.error}</span>
+          )}
         </div>
         {this.state.isLoggedIn && <Redirect to="/usermasks" />}
       </div>

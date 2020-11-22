@@ -61,6 +61,9 @@ export default class Register extends React.Component {
   render = () => {
     return (
       <div className="register-container">
+        <div className="register-header">
+          <h2>Sign up to start tracking your masks</h2>
+        </div>
         <div className="register-form">
           {['email', 'fullname', 'username', 'password'].map((el) => (
             <input
@@ -83,14 +86,18 @@ export default class Register extends React.Component {
             />
           ))}
         </div>
-        <div className="button-wrapper">
-          <button onClick={this.handleSubmit}>Sign Up</button>
-        </div>
-        <div className="error-container">
-          {this.state.error && <h4>{this.state.error}</h4>}
+        <div className="register-button-wrapper">
+          <span className="register-button" onClick={this.handleSubmit}>
+            Sign Up
+          </span>
         </div>
         <div>
-          Have an account? <Link to="/">Log In</Link>
+          Already have an account? <Link to="/">Log In</Link>
+        </div>
+        <div className="error-container">
+          {this.state.error && (
+            <span className="error-message">{this.state.error}</span>
+          )}
         </div>
         {this.state.isRegistered && <Redirect to="/" />}
       </div>
