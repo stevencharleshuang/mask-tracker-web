@@ -171,7 +171,8 @@ class EditMask extends React.Component {
             <Link to="/usermaskdetails">Back from whence you came</Link>
           </div>
         </div>
-        {this.state.redirect && <Redirect to="/usermaskdetails" />}
+        {/* TODO: Refactor this to redirect to the mask details page on submit */}
+        {this.state.redirect && <Redirect to="/usermasks" />}
       </div>
     );
   }
