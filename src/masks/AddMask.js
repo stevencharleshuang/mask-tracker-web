@@ -10,7 +10,6 @@ class AddMask extends React.Component {
     super(props);
 
     this.state = {
-      counter: 0, // Delete
       brand: 'Happy Masks',
       hoursRemaining: 0,
       hoursWorn: 0,
@@ -162,11 +161,18 @@ class AddMask extends React.Component {
                 value={this.state.hoursWorn}
               />
             </div>
-            <div className="form-item">
-              <button onClick={this.handleReset}>Reset</button>
-            </div>
-            <div className="form-item">
-              <button onClick={this.handleSubmit}>Submit</button>
+            {/* <div className="add-mask-form-button-wrapper">
+              <span className="add-mask-form-button" onClick={this.handleReset}>
+                Reset
+              </span>
+            </div> */}
+            <div className="add-mask-form-button-wrapper">
+              <span
+                className="add-mask-form-button"
+                onClick={this.handleSubmit}
+              >
+                Submit
+              </span>
             </div>
             <a className="app-link" onClick={() => this.props.history.goBack()}>
               Back from whence you came

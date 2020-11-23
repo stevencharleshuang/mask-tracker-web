@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -17,12 +17,19 @@ class UserMaskDetails extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.setState({
-      maskDetails: this.props.selectedMask,
-      userMasks: this.props.userMasks,
-      loading: false,
-    });
+  async componentDidMount() {
+    try {
+      const maskDetails = await this.props.selectedMask;
+      const userMasks = await this.props.userMasks;
+
+      this.setState({
+        maskDetails,
+        userMasks,
+        loading: false,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   // TODO: The component is rendering twice for some reason... hooks hijinks?
@@ -32,8 +39,8 @@ class UserMaskDetails extends React.Component {
     this.props.history.push({
       pathname: '/editmask',
       state: {
-        selectedMask: this.state.maskDetails,
-        userMasks: this.state.maskDetails,
+        selectedMask: this.props.selectedMask,
+        userMasks: this.props.userMasks,
       },
     });
 
@@ -51,6 +58,7 @@ class UserMaskDetails extends React.Component {
   };
 
   render() {
+    console.log(this.state, this.props);
     return (
       <div className="mask-details">
         {this.state.loading ? (

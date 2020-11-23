@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { updateMask } from '../store/actions/maskActions';
@@ -35,6 +35,7 @@ class EditMask extends React.Component {
           photoURL: photoURL ? photoURL : '',
         },
         userMasks: this.props.userMasks,
+        redirect: false,
       };
     }
   }
@@ -56,10 +57,7 @@ class EditMask extends React.Component {
         updatedMaskDetails.totalHours - updatedMaskDetails.hoursWorn;
 
       await this.props.updateMask(maskId, userMasks, updatedMaskDetails);
-      await this.props.history.push({
-        pathname: '/usermaskdetails',
-        state: { ...updatedMaskDetails },
-      });
+      this.setState({ redirect: true });
     } catch (error) {
       console.error(error);
     }
@@ -69,7 +67,7 @@ class EditMask extends React.Component {
     return (
       <div className="edit-mask">
         <h1>Edit Mask</h1>
-        {!this.state && <h4>Something is amiss here...</h4>}
+        {!this.state.selectedMask && <h4>Something is amiss here...</h4>}
         {/* TODO: render form with fields placeheld by state */}
         <div className="edit-mask-container">
           <div className="mask-image-container">
@@ -173,6 +171,7 @@ class EditMask extends React.Component {
             <Link to="/usermaskdetails">Back from whence you came</Link>
           </div>
         </div>
+        {this.state.redirect && <Redirect to="/usermaskdetails" />}
       </div>
     );
   }
