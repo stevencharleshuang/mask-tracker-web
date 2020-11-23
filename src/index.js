@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
+// import { createLogger } from 'redux-logger';
 
 import userReducer from './store/reducers/userReducer';
 import maskReducer from './store/reducers/maskReducer';
