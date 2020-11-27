@@ -20,13 +20,13 @@ const App = () => {
         <Header />
         <main>
           <Switch>
-            <Route exact path="/" component={Index}></Route>
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
             <Route exact path="/usermasks" component={UserMasks} />
             <Route exact path="/addmask" component={AddMask} />
             <Route exact path="/usermaskdetails" component={UserMaskDetails} />
             <Route exact path="/editmask" component={EditMask} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={Index}></Route>
           </Switch>
         </main>
       </Router>

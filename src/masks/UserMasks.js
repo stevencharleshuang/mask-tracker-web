@@ -39,20 +39,21 @@ class UserMasks extends React.Component {
   render() {
     return (
       <div className="user-masks">
-        {!this.props.isAuthenticated && <Redirect to="/login" />}
         {this.state.loading ? (
           <img
             className="app-loading-spinner"
             src={loadingSpinner}
             alt="loading spinner"
           />
-        ) : (
+        ) : this.props.isAuthenticated ? (
           this.props.userMasks && (
             <UserMasksList
               loading={this.state.loading}
               userMasks={this.state.userMasks}
             />
           )
+        ) : (
+          <Redirect to="/login" />
         )}
       </div>
     );
