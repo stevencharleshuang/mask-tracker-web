@@ -25,8 +25,6 @@ class Login extends React.Component {
   componentDidMount() {
     this.unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        console.log(`${user.email} is signed in`);
-        console.log(`User: ${user}`);
         this.props.login();
         this.props.setUserData(await auth.currentUser);
         this.setState({ isLoggedIn: true });

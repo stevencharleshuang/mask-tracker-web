@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { selectMask } from '../store/actions/maskActions';
 
 const UserMasksList = (props) => {
+  console.log(props);
   return (
     <div className="masks-list-container">
       <h1>Masks You Be Tracking</h1>

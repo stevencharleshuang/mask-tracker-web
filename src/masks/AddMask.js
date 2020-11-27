@@ -20,6 +20,12 @@ class AddMask extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if (this.state.brand === 'Happy Masks') {
+      this.setState({ totalHours: 250 });
+    }
+  }
+
   handleChange = (e, isNum) => {
     isNum
       ? this.setState(
@@ -103,7 +109,7 @@ class AddMask extends React.Component {
               <br />
               <select id="brand" name="brand" onChange={this.handleChange}>
                 <option value="Happy Masks">Happy Masks</option>
-                <option value="Planet Masks">Planet Masks</option>
+                {/* <option value="Planet Masks">Planet Masks</option> */}
               </select>
             </div>
             <div className="form-item">
@@ -132,18 +138,22 @@ class AddMask extends React.Component {
               </select>
             </div>
             <div className="form-item">
-              <label htmlFor="total-hours">Mask Longevity</label>
+              <label htmlFor="total-hours">Mask Total Hours</label>
               <br />
               <input
                 autoCapitalize="on"
                 autoCorrect="off"
                 maxLength="10"
                 name="totalHours"
-                placeholder="0"
+                placeholder="250"
                 type="number"
                 id="total-hours"
                 onChange={(e) => this.handleChange(e, true)}
-                value={this.state.totalHours}
+                value={
+                  this.state.brand === 'Happy Masks'
+                    ? 250
+                    : this.state.totalHours
+                }
               />
             </div>
             <div className="form-item">

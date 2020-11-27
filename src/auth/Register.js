@@ -30,7 +30,7 @@ export default class Register extends React.Component {
         this.state.formData.password
       );
 
-      if (newUser.user.uid) {
+      if (auth.currentUser && newUser.user.uid) {
         const uid = newUser.user.uid;
         const { email, fullname, username } = this.state.formData;
         const user = {
@@ -41,6 +41,7 @@ export default class Register extends React.Component {
         };
 
         await db.doc(`/users/${uid}`).set(user, { merge: true });
+        await auth.currentUser.updateProfile({ displayName: username });
 
         this.setState({
           formData: {
