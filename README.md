@@ -15,3 +15,4 @@ and mask data. React and Redux are used on the front end.
 - Edit mask re-routes to the mask details component before Redux has finished
   updating the store data
 - Add models for other mask brands such as Planet Mask and filter tracking
+- If user is authorized, Index defaults to login view before redirecting to user's masks list view
